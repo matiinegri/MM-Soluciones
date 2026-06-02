@@ -6,7 +6,6 @@ import { defineConfig } from 'vite';
 export default defineConfig(() => {
   return {
     plugins: [react(), tailwindcss()],
-    base: '/MM-Soluciones/', // <--- AGREGÁ ESTA LÍNEA (reemplazá con el nombre exacto de tu repo)
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
