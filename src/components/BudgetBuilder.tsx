@@ -106,27 +106,27 @@ export default function BudgetBuilder({ isOpen, onClose, onApplyQuote }: BudgetB
       {/* Backdrop */}
       <div 
         onClick={onClose}
-        className="absolute inset-0 bg-[#060e20]/80 backdrop-blur-sm cursor-pointer" 
+        className="absolute inset-0 bg-black/60 backdrop-blur-sm cursor-pointer" 
       />
 
       {/* Slide-over panel content */}
-      <div className="relative w-full max-w-2xl h-full bg-[#131b2e] border-l border-white/10 shadow-2xl flex flex-col z-10 text-[#dae2fd]">
+      <div className="relative w-full max-w-2xl h-full bg-bg-card border-l border-border-soft shadow-2xl flex flex-col z-10 text-text-main">
         
         {/* Header toolbar */}
-        <div className="p-6 border-b border-white/10 flex justify-between items-center bg-[#0b1326]">
+        <div className="p-6 border-b border-border-soft flex justify-between items-center bg-bg-card-hover/50">
           <div className="flex items-center gap-2.5">
-            <Calculator className="h-5 w-5 text-[#00f0ff]" />
-            <h3 className="font-display text-lg font-bold text-white">
+            <Calculator className="h-5 w-5 text-text-accent" />
+            <h3 className="font-display text-lg font-bold text-text-title">
               Cotizador de Proyectos
             </h3>
           </div>
           <div className="flex items-center gap-4">
             {/* Currency Toggle */}
-            <div className="flex bg-[#171f33] p-1 rounded-md border border-white/5 select-none">
+            <div className="flex bg-bg-card-hover p-1 rounded-md border border-border-soft select-none">
               <button
                 onClick={() => setCurrency("USD")}
                 className={`px-3 py-1 text-[10px] font-bold rounded transition-all cursor-pointer ${
-                  currency === "USD" ? "bg-[#00f0ff] text-[#002022]" : "text-[#b9cacb] hover:text-white"
+                  currency === "USD" ? "bg-text-accent text-bg-main" : "text-text-secondary hover:text-text-main"
                 }`}
               >
                 USD
@@ -134,7 +134,7 @@ export default function BudgetBuilder({ isOpen, onClose, onApplyQuote }: BudgetB
               <button
                 onClick={() => setCurrency("ARS")}
                 className={`px-3 py-1 text-[10px] font-bold rounded transition-all cursor-pointer ${
-                  currency === "ARS" ? "bg-[#00f0ff] text-[#002022]" : "text-[#b9cacb] hover:text-white"
+                  currency === "ARS" ? "bg-text-accent text-bg-main" : "text-text-secondary hover:text-text-main"
                 }`}
               >
                 ARS
@@ -142,7 +142,7 @@ export default function BudgetBuilder({ isOpen, onClose, onApplyQuote }: BudgetB
             </div>
             <button 
               onClick={onClose}
-              className="p-1.5 rounded-full hover:bg-white/5 text-[#b9cacb] hover:text-white transition-colors cursor-pointer"
+              className="p-1.5 rounded-full hover:bg-bg-hover-soft text-text-secondary hover:text-text-main transition-colors cursor-pointer"
             >
               <X className="h-5 w-5" />
             </button>
@@ -155,10 +155,10 @@ export default function BudgetBuilder({ isOpen, onClose, onApplyQuote }: BudgetB
           {/* Step 1: Select Capability Modules */}
           <div>
             <div className="flex items-center justify-between mb-4">
-              <label className="text-xs uppercase font-extrabold tracking-widest text-[#00f0ff] block">
+              <label className="text-xs uppercase font-extrabold tracking-widest text-text-accent block">
                 1. Selección de Módulos & Sistemas
               </label>
-              <span className="text-[10px] text-[#b9cacb] italic">Haz clic para agregar</span>
+              <span className="text-[10px] text-text-secondary italic">Haz clic para agregar</span>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {capabilitiesData.map((cap) => {
@@ -169,26 +169,26 @@ export default function BudgetBuilder({ isOpen, onClose, onApplyQuote }: BudgetB
                     onClick={() => handleToggleCapability(cap.id)}
                     className={`flex items-start gap-3 p-3.5 rounded-lg border text-left transition-all cursor-pointer ${
                       isSelected
-                        ? "bg-[#00f0ff]/10 border-[#00f0ff] text-white shadow-[0_0_12px_rgba(0,240,255,0.15)]"
-                        : "bg-[#171f33]/40 border-white/5 text-[#b9cacb] hover:border-white/10 hover:bg-[#171f33]/60"
+                        ? "bg-text-accent/10 border-text-accent text-text-title shadow-[0_0_12px_rgba(0,105,112,0.15)]"
+                        : "bg-bg-card-hover/40 border-border-softer text-text-secondary hover:border-border-soft hover:bg-bg-card-hover/60"
                     }`}
                   >
                     <div className={`p-1 rounded mt-0.5 border select-none ${
-                      isSelected ? "bg-[#00f0ff] text-[#002022] border-[#00f0ff]" : "bg-white/5 text-transparent border-white/10"
+                      isSelected ? "bg-text-accent text-bg-main border-text-accent" : "bg-bg-hover-soft text-transparent border-border-softer"
                     }`}>
                       <Check className="h-3 w-3" />
                     </div>
                     <div className="flex-1">
-                      <div className="text-xs font-bold text-white">{cap.title}</div>
-                      <div className="text-[10px] text-[#b9cacb]/80 mt-1 line-clamp-1">{cap.description}</div>
-                      <div className="text-[11px] font-semibold text-[#00f0ff]/90 mt-1.5 flex flex-wrap gap-1 items-center">
+                      <div className="text-xs font-bold text-text-title">{cap.title}</div>
+                      <div className="text-[10px] text-text-secondary mt-1 line-clamp-1">{cap.description}</div>
+                      <div className="text-[11px] font-semibold text-text-accent mt-1.5 flex flex-wrap gap-1 items-center">
                         <span>{formatPrice(cap.basePriceUSD)}</span>
                         {cap.monthlySubscriptionUSD && (
-                          <span className="text-[#b9cacb] font-normal text-[10px]">
+                          <span className="text-text-secondary font-normal text-[10px]">
                             + {formatPrice(cap.monthlySubscriptionUSD)}/mes
                           </span>
                         )}
-                        <span className="text-white/20">•</span>
+                        <span className="text-text-secondary/30">•</span>
                         <span>{cap.estimatedWeeks === 0.7 ? "5 días" : `${cap.estimatedWeeks} sem`}</span>
                       </div>
                     </div>
@@ -200,7 +200,7 @@ export default function BudgetBuilder({ isOpen, onClose, onApplyQuote }: BudgetB
 
           {/* Step 2: Choose Technical Scale */}
           <div>
-            <label className="text-xs uppercase font-extrabold tracking-widest text-[#00f0ff] block mb-4">
+            <label className="text-xs uppercase font-extrabold tracking-widest text-text-accent block mb-4">
               2. Escala & Complejidad del Software
             </label>
             <div className="grid grid-cols-3 gap-3">
@@ -216,15 +216,15 @@ export default function BudgetBuilder({ isOpen, onClose, onApplyQuote }: BudgetB
                     onClick={() => setSelection({ ...selection, techScale: scale.id as any })}
                     className={`p-3 rounded-lg border text-left transition-all cursor-pointer ${
                       isSelected
-                        ? "bg-[#00f0ff]/10 border-[#00f0ff] text-white shadow-[0_0_10px_rgba(0,240,255,0.1)]"
-                        : "bg-[#171f33]/40 border-white/5 text-[#b9cacb] hover:border-white/10"
+                        ? "bg-text-accent/10 border-text-accent text-text-title shadow-[0_0_10px_rgba(0,105,112,0.1)]"
+                        : "bg-bg-card-hover/40 border-border-softer text-text-secondary hover:border-border-soft"
                     }`}
                   >
                     <div className="flex justify-between items-center mb-1">
-                      <span className="text-xs font-bold text-white">{scale.title}</span>
-                      <span className="text-[10px] text-[#00f0ff] font-mono font-bold">{scale.factor}</span>
+                      <span className="text-xs font-bold text-text-title">{scale.title}</span>
+                      <span className="text-[10px] text-text-accent font-mono font-bold">{scale.factor}</span>
                     </div>
-                    <p className="text-[10px] text-[#b9cacb] leading-tight line-clamp-2">{scale.desc}</p>
+                    <p className="text-[10px] text-text-secondary leading-tight line-clamp-2">{scale.desc}</p>
                   </button>
                 );
               })}
@@ -233,7 +233,7 @@ export default function BudgetBuilder({ isOpen, onClose, onApplyQuote }: BudgetB
 
           {/* Step 3: Choose Support Level */}
           <div>
-            <label className="text-xs uppercase font-extrabold tracking-widest text-[#00f0ff] block mb-4">
+            <label className="text-xs uppercase font-extrabold tracking-widest text-text-accent block mb-4">
               3. Acuerdo de Nivel de Servicio (SLA) & Soporte
             </label>
             <div className="grid grid-cols-3 gap-3">
@@ -249,15 +249,15 @@ export default function BudgetBuilder({ isOpen, onClose, onApplyQuote }: BudgetB
                     onClick={() => setSelection({ ...selection, supportPlan: plan.id as any })}
                     className={`p-3 rounded-lg border text-left transition-all cursor-pointer ${
                       isSelected
-                        ? "bg-[#00f0ff]/10 border-[#00f0ff] text-white shadow-[0_0_10px_rgba(0,240,255,0.1)]"
-                        : "bg-[#171f33]/40 border-white/5 text-[#b9cacb] hover:border-white/10"
+                        ? "bg-text-accent/10 border-text-accent text-text-title shadow-[0_0_10px_rgba(0,105,112,0.1)]"
+                        : "bg-bg-card-hover/40 border-border-softer text-text-secondary hover:border-border-soft"
                     }`}
                   >
                     <div className="flex justify-between items-center mb-1">
-                      <span className="text-xs font-bold text-white">{plan.title}</span>
-                      <span className="text-[10px] text-[#00f0ff] font-mono font-bold">{plan.price}</span>
+                      <span className="text-xs font-bold text-text-title">{plan.title}</span>
+                      <span className="text-[10px] text-text-accent font-mono font-bold">{plan.price}</span>
                     </div>
-                    <p className="text-[10px] text-[#b9cacb] leading-tight line-clamp-2">{plan.desc}</p>
+                    <p className="text-[10px] text-text-secondary leading-tight line-clamp-2">{plan.desc}</p>
                   </button>
                 );
               })}
@@ -267,22 +267,22 @@ export default function BudgetBuilder({ isOpen, onClose, onApplyQuote }: BudgetB
         </div>
 
         {/* Compilation Footer Panel showing pricing breakdown */}
-        <div className="p-6 border-t border-white/10 bg-[#0b1326] flex flex-col gap-4">
+        <div className="p-6 border-t border-border-soft bg-bg-navbar flex flex-col gap-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <span className="text-xs text-[#b9cacb] block font-sans">Tiempo acumulado estimado</span>
-              <span className="text-sm font-semibold text-white flex items-center gap-1.5 mt-0.5">
-                <Calendar className="h-4 w-4 text-[#00f0ff]" />
+              <span className="text-xs text-text-secondary block font-sans">Tiempo acumulado estimado</span>
+              <span className="text-sm font-semibold text-text-title flex items-center gap-1.5 mt-0.5">
+                <Calendar className="h-4 w-4 text-text-accent" />
                 {totalWeeks === 0.7 ? "5 días" : `~${totalWeeks.toFixed(1)} semanas`} de desarrollo activo
               </span>
             </div>
             <div className="text-right">
-              <span className="text-xs text-[#b9cacb] block font-sans">Presupuesto Estimado</span>
-              <span className="text-2xl font-display font-extrabold text-[#00f0ff] tracking-tight filter drop-shadow-[0_2px_8px_rgba(0,240,255,0.3)] block">
+              <span className="text-xs text-text-secondary block font-sans">Presupuesto Estimado</span>
+              <span className="text-2xl font-display font-extrabold text-text-accent tracking-tight block">
                 {formatPrice(finalPrice)}
               </span>
               {subscriptionSum > 0 && (
-                <span className="text-xs text-white/70 block mt-0.5">
+                <span className="text-xs text-text-main/70 block mt-0.5">
                   + {formatPrice(subscriptionSum)}/mes de abono
                 </span>
               )}
@@ -291,13 +291,13 @@ export default function BudgetBuilder({ isOpen, onClose, onApplyQuote }: BudgetB
 
           <button
             onClick={handleCompileToContact}
-            className="w-full font-sans text-xs font-extrabold uppercase tracking-widest bg-[#00f0ff] text-[#002022] py-4 rounded-lg hover:shadow-[0_0_20px_rgba(0,240,255,0.3)] transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
+            className="w-full font-sans text-xs font-extrabold uppercase tracking-widest bg-text-accent text-bg-main py-4 rounded-lg hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
           >
             <span>Iniciar Consultoría con este Plan</span>
             <ArrowRight className="h-4 w-4" />
           </button>
 
-          <p className="text-[10px] font-mono text-[#b9cacb]/50 text-center uppercase tracking-wide">
+          <p className="text-[10px] font-mono text-text-secondary/50 text-center uppercase tracking-wide">
             * ESTA ES UNA SIMULACIÓN PRELIMINAR SUJETA A REVISIÓN TÉCNICA REFINADA.
           </p>
         </div>

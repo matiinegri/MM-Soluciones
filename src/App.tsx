@@ -14,6 +14,23 @@ import Footer from "./components/Footer";
 export default function App() {
   const [activeSection, setActiveSection] = useState("hero");
   const [prefilledMessage, setPrefilledMessage] = useState("");
+  const [theme, setTheme] = useState<"dark" | "light">(() => {
+    const saved = localStorage.getItem("theme");
+    return saved === "light" ? "light" : "dark";
+  });
+
+  useEffect(() => {
+    if (theme === "light") {
+      document.documentElement.classList.add("light");
+    } else {
+      document.documentElement.classList.remove("light");
+    }
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  };
 
   const handleApplyQuoteToForm = (quoteText: string) => {
     setPrefilledMessage(quoteText);
@@ -64,9 +81,9 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#060e20] text-[#dae2fd]">
+    <div className="min-h-screen bg-bg-main text-text-main transition-colors duration-300">
       {/* High Fidelity Fixed Navigation Bar */}
-      <Navbar onNavigate={handleNavigate} activeSection={activeSection} />
+      <Navbar onNavigate={handleNavigate} activeSection={activeSection} theme={theme} onToggleTheme={toggleTheme} />
 
       {/* Floating dynamic particles backplane glow */}
       <main className="relative">

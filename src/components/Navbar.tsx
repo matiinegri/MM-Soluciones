@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { Menu, X, Rocket } from "lucide-react";
+import { Menu, X, Rocket, Sun, Moon } from "lucide-react";
 
 interface NavbarProps {
   onNavigate: (section: string) => void;
   activeSection: string;
+  theme: "dark" | "light";
+  onToggleTheme: () => void;
 }
 
 export function LogoSVG() {
@@ -61,7 +63,7 @@ export function LogoSVG() {
   );
 }
 
-export default function Navbar({ onNavigate, activeSection }: NavbarProps) {
+export default function Navbar({ onNavigate, activeSection, theme, onToggleTheme }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
@@ -76,7 +78,7 @@ export default function Navbar({ onNavigate, activeSection }: NavbarProps) {
   };
 
   return (
-    <header className="fixed top-0 w-full z-50 bg-[#0b1326]/80 backdrop-blur-xl border-b border-white/10 shadow-sm transition-all duration-300">
+    <header className="fixed top-0 w-full z-50 bg-bg-navbar backdrop-blur-xl border-b border-border-soft shadow-sm transition-all duration-300">
       <div className="flex justify-between items-center px-6 md:px-20 max-w-7xl mx-auto h-20">
         <div 
           className="flex items-center gap-3 cursor-pointer group"
@@ -85,7 +87,7 @@ export default function Navbar({ onNavigate, activeSection }: NavbarProps) {
           <div className="transition-transform duration-300 group-hover:scale-105">
             <LogoSVG />
           </div>
-          <span className="font-display text-2xl font-bold tracking-tighter text-[#dbfcff]">
+          <span className="font-display text-2xl font-bold tracking-tighter text-text-title">
             M<span className="text-[#00f0ff]">|</span>M Soluciones
           </span>
         </div>
@@ -98,8 +100,8 @@ export default function Navbar({ onNavigate, activeSection }: NavbarProps) {
               onClick={() => handleLinkClick(item.id)}
               className={`font-sans text-sm font-semibold tracking-wider transition-colors duration-200 cursor-pointer ${
                 activeSection === item.id
-                  ? "text-[#00f0ff]"
-                  : "text-[#b9cacb] hover:text-[#00f0ff]"
+                  ? "text-text-accent"
+                  : "text-text-secondary hover:text-text-accent"
               }`}
             >
               {item.label}
@@ -107,34 +109,53 @@ export default function Navbar({ onNavigate, activeSection }: NavbarProps) {
           ))}
         </nav>
 
-        <div className="hidden md:flex items-center">
+        <div className="hidden md:flex items-center gap-4">
+          {/* Theme Toggle Button */}
+          <button
+            onClick={onToggleTheme}
+            className="p-2 rounded-lg border border-border-soft text-text-secondary hover:text-text-title transition-all duration-300 hover:bg-bg-hover-soft cursor-pointer flex items-center justify-center"
+            aria-label="Toggle Theme"
+          >
+            {theme === "light" ? <Moon className="h-4.5 w-4.5" /> : <Sun className="h-4.5 w-4.5" />}
+          </button>
+
           <button
             onClick={() => handleLinkClick("contacto")}
-            className="font-sans text-sm font-semibold tracking-wide bg-transparent border border-[#00f0ff] text-[#00f0ff] px-6 py-2 rounded transition-all duration-300 hover:bg-[#00f0ff]/10 hover:shadow-[0_0_15px_rgba(0,240,255,0.3)] cursor-pointer"
+            className="font-sans text-sm font-semibold tracking-wide bg-transparent border border-text-accent text-text-accent px-6 py-2 rounded transition-all duration-300 hover:bg-text-accent/10 cursor-pointer"
           >
             Consultoría
           </button>
         </div>
 
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden text-[#dae2fd] hover:text-[#00f0ff] transition-colors cursor-pointer"
-          aria-label="Toggle menu"
-        >
-          {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
+        {/* Mobile Menu Button & Theme Toggle */}
+        <div className="flex items-center gap-3 md:hidden">
+          <button
+            onClick={onToggleTheme}
+            className="p-2 rounded-lg border border-border-soft text-text-secondary hover:text-text-title transition-colors cursor-pointer flex items-center justify-center"
+            aria-label="Toggle Theme"
+          >
+            {theme === "light" ? <Moon className="h-4.5 w-4.5" /> : <Sun className="h-4.5 w-4.5" />}
+          </button>
+
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="text-text-main hover:text-text-accent transition-colors cursor-pointer"
+            aria-label="Toggle menu"
+          >
+            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Drawer */}
       {isOpen && (
-        <div className="md:hidden bg-[#0b1326] border-b border-white/10 px-6 py-8 flex flex-col gap-6 animate-fade-in">
+        <div className="md:hidden bg-bg-card border-b border-border-soft px-6 py-8 flex flex-col gap-6 animate-fade-in">
           {navItems.map((item) => (
             <button
               key={item.id}
               onClick={() => handleLinkClick(item.id)}
-              className={`text-left font-sans text-lg font-medium transition-colors duration-200 py-2 ${
-                activeSection === item.id ? "text-[#00f0ff]" : "text-[#b9cacb]"
+              className={`text-left font-sans text-lg font-medium transition-colors duration-200 py-2 cursor-pointer ${
+                activeSection === item.id ? "text-text-accent" : "text-text-secondary"
               }`}
             >
               {item.label}
@@ -142,7 +163,7 @@ export default function Navbar({ onNavigate, activeSection }: NavbarProps) {
           ))}
           <button
             onClick={() => handleLinkClick("contacto")}
-            className="w-full text-center font-sans text-base font-semibold border border-[#00f0ff] text-[#00f0ff] py-3 rounded hover:bg-[#00f0ff]/10 transition-colors"
+            className="w-full text-center font-sans text-base font-semibold border border-text-accent text-text-accent py-3 rounded hover:bg-text-accent/10 transition-colors cursor-pointer"
           >
             Consultoría Gratuita
           </button>
