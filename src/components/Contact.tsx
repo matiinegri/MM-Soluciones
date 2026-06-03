@@ -39,39 +39,80 @@ export default function Contact({ prefilledMessage, onClearPrefilledMessage }: C
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name || !form.email || !form.message) return;
 
     setSubmissionState("submitting");
-    setLogs([]);
+    setLogs(["⚡ [DISPATCH] Inicializando canal seguro de transferencia con Web3Forms..."]);
 
-    // Simulate high-tech terminal trace logging feedback for dramatic digital craftsmanship
-    const steps = [
-      "⚡ [DISPATCH] Inicializando canal seguro SSL/TLS con M|M Soluciones...",
-      "🔬 [ANALYZE] Sanitizando entrada del cliente y parseando campos estructurales...",
-      "📂 [ROUTING] Categorizando requerimientos funcionales...",
-      "⚙️ [COMPILE] Construyendo reporte ejecutivo de factibilidad técnica...",
-      "🚀 [TRANSMIT] Despachando mensaje del ecosistema..."
-    ];
-
-    steps.forEach((text, i) => {
-      setTimeout(() => {
-        setLogs((prev) => [...prev, text]);
-      }, (i + 1) * 600);
-    });
-
-    setTimeout(() => {
-      setSubmissionState("success");
-      onClearPrefilledMessage();
-      setForm({
-        name: "",
-        email: "",
-        company: "",
-        serviceSelected: "general",
-        message: ""
+    const updateLogWithDelay = (message: string, delay: number) => {
+      return new Promise<void>((resolve) => {
+        setTimeout(() => {
+          setLogs((prev) => [...prev, message]);
+          resolve();
+        }, delay);
       });
-    }, (steps.length + 1) * 600);
+    };
+
+    try {
+      await updateLogWithDelay("🔬 [ANALYZE] Sanitizando entrada del cliente y estructurando campos...", 600);
+      await updateLogWithDelay("📂 [ROUTING] Mapeando metadatos de servicios seleccionados...", 600);
+      await updateLogWithDelay("⚙️ [COMPILE] Generando payload y cifrando cabeceras de transmisión...", 600);
+
+      const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "YOUR_ACCESS_KEY_HERE";
+      
+      const payload = {
+        access_key: accessKey,
+        subject: `Nueva Consulta de ${form.name} - M|M Soluciones`,
+        from_name: "Formulario Web - M|M Soluciones",
+        name: form.name,
+        email: form.email,
+        company: form.company || "No especificada",
+        service: form.serviceSelected,
+        message: form.message,
+      };
+
+      setLogs((prev) => [...prev, "🚀 [TRANSMIT] Transmitiendo paquete de datos al gateway..."]);
+
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        setLogs((prev) => [...prev, "✅ [SUCCESS] ¡Datos enviados correctamente y recibidos en destino!"]);
+        
+        await new Promise<void>((resolve) => setTimeout(resolve, 800));
+
+        setSubmissionState("success");
+        onClearPrefilledMessage();
+        setForm({
+          name: "",
+          email: "",
+          company: "",
+          serviceSelected: "general",
+          message: ""
+        });
+      } else {
+        throw new Error(result.message || "Error devuelto por el gateway de envíos.");
+      }
+    } catch (error: any) {
+      console.error(error);
+      setLogs((prev) => [
+        ...prev,
+        `❌ [ERROR] Transmisión fallida: ${error.message || error}`,
+        "⚠️ [WARN] Verificá que la clave de acceso de Web3Forms (VITE_WEB3FORMS_ACCESS_KEY) esté correctamente configurada en tu archivo .env."
+      ]);
+      await new Promise<void>((resolve) => setTimeout(resolve, 6000));
+      setSubmissionState("idle");
+    }
   };
 
   return (
@@ -95,7 +136,7 @@ export default function Contact({ prefilledMessage, onClearPrefilledMessage }: C
 
             <div className="space-y-4">
               <a
-                href="https://wa.me/5492911234567"
+                href="https://wa.me/5492915131971"
                 target="_blank"
                 rel="noreferrer"
                 className="group p-5 rounded-lg bg-bg-card border border-border-soft hover:border-[#25d366]/30 hover:bg-bg-card-hover transition-all flex items-center gap-4 shadow-sm"
@@ -105,12 +146,14 @@ export default function Contact({ prefilledMessage, onClearPrefilledMessage }: C
                 </div>
                 <div>
                   <h4 className="font-display text-sm font-bold text-text-title group-hover:text-[#25d366] transition-colors">WhatsApp</h4>
-                  <p className="text-xs text-text-secondary/80 group-hover:text-text-main transition-colors">+54 9 291 123-4567</p>
+                  <p className="text-xs text-text-secondary/80 group-hover:text-text-main transition-colors">+54 291 513-1971</p>
                 </div>
               </a>
 
               <a
-                href="mailto:contacto@mmsoluciones.dev"
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=mmsoluciones.dev@gmail.com&su=Consulta%20sobre%20Servicios%20-%20M%7CM%20Soluciones"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group p-5 rounded-lg bg-bg-card border border-border-soft hover:border-text-accent/30 hover:bg-bg-card-hover transition-all flex items-center gap-4 shadow-sm"
               >
                 <div className="h-10 w-10 rounded-md bg-text-accent/10 text-text-accent flex items-center justify-center border border-text-accent/20 group-hover:bg-text-accent group-hover:text-[#002022] transition-all">
@@ -118,12 +161,12 @@ export default function Contact({ prefilledMessage, onClearPrefilledMessage }: C
                 </div>
                 <div>
                   <h4 className="font-display text-sm font-bold text-text-title group-hover:text-text-accent transition-colors">Email Directo</h4>
-                  <p className="text-xs text-text-secondary/80 group-hover:text-text-main transition-colors">contacto@mmsoluciones.dev</p>
+                  <p className="text-xs text-text-secondary/80 group-hover:text-text-main transition-colors">mmsoluciones.dev@gmail.com</p>
                 </div>
               </a>
 
               <a
-                href="https://instagram.com/mmsoluciones"
+                href="https://instagram.com/mm.solucionesdigitales"
                 target="_blank"
                 rel="noreferrer"
                 className="group p-5 rounded-lg bg-bg-card border border-border-soft hover:border-[#e1306c]/30 hover:bg-bg-card-hover transition-all flex items-center gap-4 shadow-sm"
@@ -133,7 +176,7 @@ export default function Contact({ prefilledMessage, onClearPrefilledMessage }: C
                 </div>
                 <div>
                   <h4 className="font-display text-sm font-bold text-text-title group-hover:text-[#e1306c] transition-colors">Instagram</h4>
-                  <p className="text-xs text-text-secondary/80 group-hover:text-text-main transition-colors">@mmsoluciones</p>
+                  <p className="text-xs text-text-secondary/80 group-hover:text-text-main transition-colors">@mm.solucionesdigitales</p>
                 </div>
               </a>
             </div>

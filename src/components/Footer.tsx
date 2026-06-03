@@ -58,17 +58,17 @@ export default function Footer({ onNavigate }: FooterProps) {
               Contacto Directo
             </h4>
             <div className="flex flex-col gap-2.5 font-sans text-xs font-semibold text-text-secondary">
-              <a href="mailto:contacto@mmsoluciones.dev" className="hover:text-text-accent transition-colors flex items-center gap-2">
+              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=mmsoluciones.dev@gmail.com&su=Consulta%20sobre%20Servicios%20-%20M%7CM%20Soluciones" target="_blank" rel="noreferrer" className="hover:text-text-accent transition-colors flex items-center gap-2">
                 <Mail className="h-4 w-4 text-text-secondary/40" />
-                <span>contacto@mmsoluciones.dev</span>
+                <span>mmsoluciones.dev@gmail.com</span>
               </a>
-              <a href="https://wa.me/5492911234567" target="_blank" rel="noreferrer" className="hover:text-text-accent transition-colors flex items-center gap-2">
+              <a href="https://wa.me/5492915131971" target="_blank" rel="noreferrer" className="hover:text-text-accent transition-colors flex items-center gap-2">
                 <MessageSquare className="h-4 w-4 text-text-secondary/40" />
-                <span>+54 9 291 123-4567</span>
+                <span>+54 291 513-1971</span>
               </a>
-              <a href="https://instagram.com/mmsoluciones" target="_blank" rel="noreferrer" className="hover:text-text-accent transition-colors flex items-center gap-2">
+              <a href="https://instagram.com/mm.solucionesdigitales" target="_blank" rel="noreferrer" className="hover:text-text-accent transition-colors flex items-center gap-2">
                 <Instagram className="h-4 w-4 text-text-secondary/40" />
-                <span>@mmsoluciones</span>
+                <span>@mm.solucionesdigitales</span>
               </a>
             </div>
           </div>
