@@ -62,9 +62,9 @@ export default function Footer({ onNavigate }: FooterProps) {
                 <Mail className="h-4 w-4 text-text-secondary/40" />
                 <span>mmsoluciones.dev@gmail.com</span>
               </a>
-              <a href="https://wa.me/5492915131971" target="_blank" rel="noreferrer" className="hover:text-text-accent transition-colors flex items-center gap-2">
+              <a href="https://wa.me/5492914971552" target="_blank" rel="noreferrer" className="hover:text-text-accent transition-colors flex items-center gap-2">
                 <MessageSquare className="h-4 w-4 text-text-secondary/40" />
-                <span>+54 291 513-1971</span>
+                <span>+54 291 497-1552</span>
               </a>
               <a href="https://instagram.com/mm.solucionesdigitales" target="_blank" rel="noreferrer" className="hover:text-text-accent transition-colors flex items-center gap-2">
                 <Instagram className="h-4 w-4 text-text-secondary/40" />

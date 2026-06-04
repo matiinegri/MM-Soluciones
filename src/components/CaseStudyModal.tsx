@@ -1,5 +1,5 @@
 import React from "react";
-import { X, Check, Database, Cpu, Milestone, ExternalLink } from "lucide-react";
+import { X, Check, Cpu, ExternalLink } from "lucide-react";
 import { Project } from "../types";
 import { motion, AnimatePresence } from "motion/react";
 
@@ -186,9 +186,10 @@ export default function CaseStudyModal({ project, onClose }: CaseStudyModalProps
               )}
               <button
                 onClick={() => {
+                  const msg = `¡Hola! Quiero consultar por un proyecto similar a "${project.title}" (${project.category}).`;
+                  const url = `https://wa.me/5492914971552?text=${encodeURIComponent(msg)}`;
+                  window.open(url, "_blank");
                   onClose();
-                  const elem = document.getElementById("contacto");
-                  if (elem) elem.scrollIntoView({ behavior: "smooth" });
                 }}
                 className="w-full sm:w-auto text-center font-sans text-xs font-bold uppercase tracking-wider bg-text-accent text-bg-main px-6 py-3 rounded-md hover:opacity-90 shadow-lg transition-all"
               >

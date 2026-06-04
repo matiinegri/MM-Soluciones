@@ -13,7 +13,6 @@ import Footer from "./components/Footer";
 
 export default function App() {
   const [activeSection, setActiveSection] = useState("hero");
-  const [prefilledMessage, setPrefilledMessage] = useState("");
   const [theme, setTheme] = useState<"dark" | "light">(() => {
     const saved = localStorage.getItem("theme");
     return saved === "light" ? "light" : "dark";
@@ -30,14 +29,6 @@ export default function App() {
 
   const toggleTheme = () => {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));
-  };
-
-  const handleApplyQuoteToForm = (quoteText: string) => {
-    setPrefilledMessage(quoteText);
-  };
-
-  const handleClearPrefilledMessage = () => {
-    setPrefilledMessage("");
   };
 
   const handleNavigate = (sectionId: string) => {
@@ -93,12 +84,9 @@ export default function App() {
 
         <Portfolio />
 
-        <Services onApplyQuoteToForm={handleApplyQuoteToForm} />
+        <Services />
 
-        <Contact
-          prefilledMessage={prefilledMessage}
-          onClearPrefilledMessage={handleClearPrefilledMessage}
-        />
+        <Contact />
       </main>
 
       {/* Corporate Footprint Footer */}

@@ -32,10 +32,10 @@ export default function Hero({ onNavigate }: HeroProps) {
         className="font-display text-4xl sm:text-5xl md:text-7xl font-bold text-text-title max-w-5xl mb-8 leading-[1.1] tracking-tight relative z-10"
       >
         Transformamos ideas en{" "}
-        <span className="bg-gradient-to-r from-text-accent via-text-accent/80 to-text-title bg-clip-text text-transparent filter drop-shadow-[0_2px_10px_var(--text-accent)]">
-          experiencias digitales
+        <span className="text-text-accent filter drop-shadow-[0_2px_10px_var(--text-accent)]">
+          experiencias digitales.
         </span>
-        .
+        
       </motion.h1>
 
       <motion.p
@@ -76,23 +76,23 @@ export default function Hero({ onNavigate }: HeroProps) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.9 }}
         transition={{ duration: 1, delay: 0.5 }}
-        className="mt-20 w-full max-w-5xl p-6 rounded-xl bg-bg-card/60 border border-border-soft backdrop-blur-sm grid grid-cols-2 md:grid-cols-4 gap-6 text-center"
+        className="mt-16 md:mt-20 w-full max-w-5xl p-4 md:p-6 rounded-xl bg-bg-card/60 border border-border-soft backdrop-blur-sm grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 text-center"
       >
-        <div>
-          <div className="font-display text-2xl md:text-3xl font-extrabold text-text-accent">+50</div>
-          <div className="text-xs text-text-secondary uppercase tracking-wider font-semibold mt-1">Lanzamientos</div>
+        <div className="py-2 md:py-0">
+          <div className="font-display text-xl md:text-3xl font-extrabold text-text-accent">+50</div>
+          <div className="text-[10px] md:text-xs text-text-secondary uppercase tracking-wider font-semibold mt-1">Lanzamientos</div>
         </div>
-        <div className="border-l border-border-soft">
-          <div className="font-display text-2xl md:text-3xl font-extrabold text-text-accent">99.9%</div>
-          <div className="text-xs text-text-secondary uppercase tracking-wider font-semibold mt-1">Uptime de Sistemas</div>
+        <div className="py-2 md:py-0 border-l border-border-soft pl-4 md:pl-6">
+          <div className="font-display text-xl md:text-3xl font-extrabold text-text-accent">99.9%</div>
+          <div className="text-[10px] md:text-xs text-text-secondary uppercase tracking-wider font-semibold mt-1">Uptime de Sistemas</div>
         </div>
-        <div className="border-l border-border-soft">
-          <div className="font-display text-2xl md:text-3xl font-extrabold text-text-accent">100%</div>
-          <div className="text-xs text-text-secondary uppercase tracking-wider font-semibold mt-1">Código Limpio</div>
+        <div className="py-2 md:py-0 md:border-l border-border-soft md:pl-6">
+          <div className="font-display text-xl md:text-3xl font-extrabold text-text-accent">100%</div>
+          <div className="text-[10px] md:text-xs text-text-secondary uppercase tracking-wider font-semibold mt-1">Código Limpio</div>
         </div>
-        <div className="border-l border-border-soft">
-          <div className="font-display text-2xl md:text-3xl font-extrabold text-text-accent">&lt;1s</div>
-          <div className="text-xs text-text-secondary uppercase tracking-wider font-semibold mt-1">Carga de Interfaz</div>
+        <div className="py-2 md:py-0 border-l border-border-soft pl-4 md:pl-6">
+          <div className="font-display text-xl md:text-3xl font-extrabold text-text-accent">&lt;1s</div>
+          <div className="text-[10px] md:text-xs text-text-secondary uppercase tracking-wider font-semibold mt-1">Carga de Interfaz</div>
         </div>
       </motion.div>
 

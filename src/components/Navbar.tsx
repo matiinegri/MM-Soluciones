@@ -113,7 +113,7 @@ export default function Navbar({ onNavigate, activeSection, theme, onToggleTheme
           {/* Theme Toggle Button */}
           <button
             onClick={onToggleTheme}
-            className="p-2 rounded-lg border border-border-soft text-text-secondary hover:text-text-title transition-all duration-300 hover:bg-bg-hover-soft cursor-pointer flex items-center justify-center"
+            className="p-2 rounded-lg border border-text-accent text-text-secondary hover:text-text-title transition-all duration-300 hover:bg-text-accent/10 cursor-pointer flex items-center justify-center"
             aria-label="Toggle Theme"
           >
             {theme === "light" ? <Moon className="h-4.5 w-4.5" /> : <Sun className="h-4.5 w-4.5" />}
@@ -123,7 +123,7 @@ export default function Navbar({ onNavigate, activeSection, theme, onToggleTheme
             onClick={() => handleLinkClick("contacto")}
             className="font-sans text-sm font-semibold tracking-wide bg-transparent border border-text-accent text-text-accent px-6 py-2 rounded transition-all duration-300 hover:bg-text-accent/10 cursor-pointer"
           >
-            Consultoría
+            Consultar
           </button>
         </div>
 
@@ -131,7 +131,7 @@ export default function Navbar({ onNavigate, activeSection, theme, onToggleTheme
         <div className="flex items-center gap-3 md:hidden">
           <button
             onClick={onToggleTheme}
-            className="p-2 rounded-lg border border-border-soft text-text-secondary hover:text-text-title transition-colors cursor-pointer flex items-center justify-center"
+            className="p-2 rounded-lg border border-text-accent text-text-secondary hover:text-text-title transition-colors cursor-pointer flex items-center justify-center"
             aria-label="Toggle Theme"
           >
             {theme === "light" ? <Moon className="h-4.5 w-4.5" /> : <Sun className="h-4.5 w-4.5" />}
@@ -165,7 +165,7 @@ export default function Navbar({ onNavigate, activeSection, theme, onToggleTheme
             onClick={() => handleLinkClick("contacto")}
             className="w-full text-center font-sans text-base font-semibold border border-text-accent text-text-accent py-3 rounded hover:bg-text-accent/10 transition-colors cursor-pointer"
           >
-            Consultoría Gratuita
+            Consultar
           </button>
         </div>
       )}

@@ -25,22 +25,6 @@ export interface ServiceCapability {
   iconName: string;
   category: string;
   typicalStack: string[];
-  estimatedWeeks: number;
-  basePriceUSD: number;
-  monthlySubscriptionUSD?: number;
 }
 
-export interface ProposalSelection {
-  capabilitiesSelected: string[];
-  techScale: "startup" | "growth" | "enterprise";
-  supportPlan: "none" | "standard" | "premium";
-}
 
-export interface ContactMessage {
-  name: string;
-  email: string;
-  company?: string;
-  message: string;
-  serviceSelected?: string;
-  status?: "pending" | "sending" | "success" | "error";
-}

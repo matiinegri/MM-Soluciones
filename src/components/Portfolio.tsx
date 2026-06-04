@@ -22,7 +22,7 @@ export default function Portfolio() {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-16">
           <div>
             <span className="text-xs font-bold uppercase tracking-widest text-text-accent mb-3 block">
-              Digital Masterpieces
+              SOFTWARE & DISEÑO DIGITAL
             </span>
             <h2 className="font-display text-4xl md:text-5xl font-extrabold text-text-title">
               Proyectos Destacados
@@ -108,7 +108,7 @@ export default function Portfolio() {
                   {/* Action launchers */}
                   <div className="flex items-center justify-between gap-4 mt-auto">
                     <div className="flex items-center gap-1.5 text-xs font-bold text-text-accent group/link">
-                      <span>Explore Case Study</span>
+                      <span>Conocer Desarrollo</span>
                       <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover/link:translate-x-1 group-hover/link:-translate-y-1" />
                     </div>
                     {project.previewUrl && (
@@ -209,7 +209,7 @@ export default function Portfolio() {
                         onClick={() => setSelectedProject(project)}
                         className="font-sans text-xs font-bold uppercase tracking-wider text-text-accent flex items-center gap-2 hover:underline cursor-pointer"
                       >
-                        <span>Explore Case Study</span>
+                        <span>Conocer Desarrollo</span>
                         <ArrowUpRight className="h-4 w-4" />
                       </button>
                       {project.previewUrl && (

@@ -16,14 +16,14 @@
 }
 
 html.light {
-  --bg-main: #f8f9fa;
-  --bg-navbar: rgba(248, 249, 250, 0.85);
+  --bg-main: #f0f5fc;
+  --bg-navbar: rgba(240, 245, 252, 0.85);
   --bg-card: #ffffff;
-  --bg-card-hover: #f1f5f9;
-  --text-title: #1a1a1a;
-  --text-main: #334155;
-  --text-secondary: #64748b;
-  --text-accent: #006970;
+  --bg-card-hover: #e6eef8;
+  --text-title: #0a1a2e;
+  --text-main: #1f3a5c;
+  --text-secondary: #5a7a94;
+  --text-accent: #00809a;
   --border-soft: rgba(0, 0, 0, 0.08);
   --border-softer: rgba(0, 0, 0, 0.04);
   --bg-hover-soft: rgba(0, 0, 0, 0.03);

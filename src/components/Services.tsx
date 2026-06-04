@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { capabilitiesData } from "../data/services";
-import BudgetBuilder from "./BudgetBuilder";
 import {
   Globe,
   Building2,
-  Briefcase,
   FolderHeart,
   Database,
   Cpu,
@@ -13,11 +11,11 @@ import {
   BarChart3,
   Monitor,
   Smartphone,
+  ShoppingCart,
+  Lightbulb,
   ChevronRight,
   Sparkles,
-  Milestone,
   ArrowRight,
-  Info,
   X,
   Compass
 } from "lucide-react";
@@ -27,7 +25,6 @@ import { motion, AnimatePresence } from "motion/react";
 const iconMap: Record<string, React.ComponentType<any>> = {
   Globe,
   Building2,
-  Briefcase,
   FolderHeart,
   Database,
   Cpu,
@@ -35,7 +32,9 @@ const iconMap: Record<string, React.ComponentType<any>> = {
   CalendarDays,
   BarChart3,
   Monitor,
-  Smartphone
+  Smartphone,
+  ShoppingCart,
+  Lightbulb
 };
 
 function CapabilityIcon({ name, ...props }: { name: string; className?: string }) {
@@ -43,12 +42,14 @@ function CapabilityIcon({ name, ...props }: { name: string; className?: string }
   return <IconComponent {...props} />;
 }
 
-interface ServicesProps {
-  onApplyQuoteToForm: (quoteText: string) => void;
+const WHATSAPP_NUMBER = "5492914971552";
+
+function openWhatsApp(message: string) {
+  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+  window.open(url, "_blank");
 }
 
-export default function Services({ onApplyQuoteToForm }: ServicesProps) {
-  const [isQuoteOpen, setIsQuoteOpen] = useState(false);
+export default function Services() {
   const [isMethodologyOpen, setIsMethodologyOpen] = useState(false);
   const [selectedCapabilityId, setSelectedCapabilityId] = useState<string | null>(null);
 
@@ -87,11 +88,11 @@ export default function Services({ onApplyQuoteToForm }: ServicesProps) {
         {/* Action Controls Toolbar under Header */}
         <div className="flex flex-wrap items-center justify-center gap-4 mb-16">
           <button
-            onClick={() => setIsQuoteOpen(true)}
+            onClick={() => openWhatsApp("¡Hola! Quiero consultar por un proyecto de desarrollo digital.")}
             className="px-6 py-3.5 bg-text-accent text-bg-main font-sans text-xs font-bold uppercase tracking-wider rounded-md hover:shadow-lg transition-all cursor-pointer flex items-center gap-2"
           >
             <Sparkles className="h-4 w-4" />
-            <span>Cotizar Proyecto</span>
+            <span>Consultar Proyecto</span>
           </button>
 
           <button
@@ -165,13 +166,13 @@ export default function Services({ onApplyQuoteToForm }: ServicesProps) {
           <div className="absolute inset-0 bg-text-accent/5 blur-3xl rounded-full w-96 h-96 -top-1/2 left-1/2 -translate-x-1/2 pointer-events-none" />
 
           <span className="text-[10px] font-bold uppercase tracking-widest text-text-accent mb-4.5 block font-mono">
-            Estudios de Viabilidad
+            SOLUCIONES A MEDIDA
           </span>
           <h3 className="font-display text-2xl md:text-3xl font-extrabold text-text-title mb-6 max-w-2xl mx-auto leading-snug">
-            ¿Listo para una actualización sistémica de tu software actual o lanzar una idea nueva?
+            ¿Listo para actualizar tu software o lanzar una nueva idea?
           </h3>
           <p className="font-sans text-sm text-text-secondary max-w-xl mx-auto mb-10">
-            Agenda una videollamada para diagnosticar tus requerimientos técnicos de manera gratuita y recibir una estimación específica.
+            Agendemos una reunión para analizar tu proyecto, detectar oportunidades y definir la mejor solución tecnológica.
           </p>
 
           <button
@@ -181,7 +182,7 @@ export default function Services({ onApplyQuoteToForm }: ServicesProps) {
             }}
             className="font-sans text-xs font-bold uppercase tracking-widest bg-text-accent text-bg-main px-8 py-4 rounded-md hover:scale-[1.03] hover:shadow-lg transition-all cursor-pointer flex items-center gap-2.5 mx-auto"
           >
-            <span>Iniciar Consultoría Gratuita</span>
+            <span>Hablemos de tu Proyecto</span>
             <ArrowRight className="h-4 w-4" />
           </button>
         </motion.div>
@@ -312,36 +313,18 @@ export default function Services({ onApplyQuoteToForm }: ServicesProps) {
                     ))}
                   </div>
                 </div>
-
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <span className="text-[10px] uppercase font-bold text-text-secondary/60 block font-mono">
-                      Duración Promedio
-                    </span>
-                    <span className="text-base font-bold text-text-accent">
-                      ~{selectedCapDetail.estimatedWeeks} semanas
-                    </span>
-                  </div>
-                  <div>
-                    <span className="text-[10px] uppercase font-bold text-text-secondary/60 block font-mono">
-                      Inversión Base Estimada
-                    </span>
-                    <span className="text-base font-bold text-text-title">
-                      ${selectedCapDetail.basePriceUSD.toLocaleString()} USD
-                    </span>
-                  </div>
-                </div>
               </div>
 
               <div className="flex gap-3 pt-4 border-t border-border-soft">
                 <button
                   onClick={() => {
+                    const msg = `¡Hola! Quiero consultar por el servicio de ${selectedCapDetail.title}.`;
+                    openWhatsApp(msg);
                     setSelectedCapabilityId(null);
-                    setIsQuoteOpen(true);
                   }}
                   className="flex-1 py-3 text-center rounded bg-text-accent text-bg-main font-semibold text-xs uppercase tracking-wider hover:opacity-90 cursor-pointer"
                 >
-                  Agregar a mi Cotizador
+                  Consultar por este servicio
                 </button>
               </div>
             </motion.div>
@@ -349,12 +332,6 @@ export default function Services({ onApplyQuoteToForm }: ServicesProps) {
         )}
       </AnimatePresence>
 
-      {/* PROPOSAL/BUDGET INTEGRATED PANEL SLIDEOVER */}
-      <BudgetBuilder
-        isOpen={isQuoteOpen}
-        onClose={() => setIsQuoteOpen(false)}
-        onApplyQuote={onApplyQuoteToForm}
-      />
     </section>
   );
 }
